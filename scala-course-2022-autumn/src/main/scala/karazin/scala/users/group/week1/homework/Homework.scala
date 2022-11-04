@@ -40,35 +40,29 @@ object Homework :
 
   object `Boolean Operators` :
 
-    def not(b: Boolean): Boolean =
-      if (b) return false
-      else return true
+  def not(b: Boolean): Boolean = if b then false else true
 
+  def and(left: Boolean,right : Boolean): Boolean = if not(left) then false else right
 
-    def and(left: Boolean, right: Boolean): Boolean =
-      if(left)
-        if(right) return true
-        else return false
-      else return false
-
-    def or(left: Boolean, right: Boolean): Boolean =
-      if(left) return true
-      else if(right) return true
-      else return false
+  def or(left: Boolean, right: Boolean): Boolean = if left then true else right
 
   end `Boolean Operators`
 
   object `Fermat Numbers` :
 
-    val multiplication: (BigInt, BigInt) => BigInt = (a,b) =>
-      if(b == 0) 0
-      else multiplication(a,b-1) + a
+  val multiplication: (BigInt, BigInt) => BigInt = (multiplicand,multiplier) =>
+    @tailrec
+    def multiplicationTailRec(multiplicand: BigInt, multiplier: BigInt, product: BigInt): BigInt =
+      if multiplier == 0 then product
+      else multiplicationTailRec(multiplicand, multiplier - 1, product + multiplicand)
 
-    val power: (BigInt, BigInt) => BigInt = (a,n) =>
-      if(n == 0) 1
-      else  multiplication(power(a,n-1),a)
+  multiplicationTailRec(multiplicand, multiplier, 0)
 
-    val fermatNumber: Int => BigInt = n => power(2,power(2,n)) + 1
+    val power: (BigInt, BigInt) => BigInt = (a, n) =>
+      if n == 0 then 1
+      else  multiplication(power(a, n - 1), a)
+
+    val fermatNumber: Int => BigInt = n => power(2, power(2, n)) + 1
 
   end `Fermat Numbers`
 
@@ -100,7 +94,7 @@ object Homework :
   else lookAndSaySequenceElementCounter(n - 1, lookAndSaySequence(num))
   }
 
-  lookAndSaySequenceElementCounter(n,"1")                                                 // call for counting the nth member of the sequence, specifying the value of the 0th as "1"
+  lookAndSaySequenceElementCounter(n, "1")                                                // call for counting the nth member of the sequence, specifying the value of the 0th as "1"
 
   }
 
