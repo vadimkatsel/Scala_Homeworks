@@ -56,8 +56,13 @@ object LookAndAaSequenceSpecification extends Properties("Look-and-say Sequence"
   import `Look-and-say Sequence`._
   import arbitraries.given Arbitrary[Int]
 
-  property("fermatNumber") = forAll { (n: Int) =>
-    lookAndSaySequenceElement(n) == 42
+  var z = new Array[BigInt](10)
+  z = Array(1, 11, 21, 1211, 111221, 312211, 13112221, 1113213211, 31131211131221, 13211311123113112211)
+
+  property("Look-and-say Sequence" ) = forAll { (n: Int) =>
+  if n < z.length then lookAndSaySequenceElement(n) == z[n]
+  else !lookAndSaySequenceElement(n).toString().contains("4")
+
   }  
 
 end LookAndAaSequenceSpecification
