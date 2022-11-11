@@ -42,9 +42,9 @@ object Homework :
 
   def not(b: Boolean): Boolean = if b then false else true
 
-  def and(left: Boolean,right : Boolean): Boolean = if not(left) then false else right
+  def and(left: Boolean,right : => Boolean): Boolean = if not(left) then false else right
 
-  def or(left: Boolean, right: Boolean): Boolean = if left then true else right
+  def or(left: Boolean, right: => Boolean): Boolean = if left then true else right
 
   end `Boolean Operators`
 
@@ -99,5 +99,4 @@ object Homework :
   }
 
   end `Look-and-say Sequence`
-
 end Homework
