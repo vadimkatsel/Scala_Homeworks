@@ -38,17 +38,11 @@ object FermatNumbersSpecification extends Properties("Fermat Numbers"):
   import `Fermat Numbers`._
   import arbitraries.given Arbitrary[Int]
 
-  property("multiplication") = forAll { (left: Int, right: Int) =>
-    multiplication(left, right) == (left * right)
-  }
+  property("multiplication") = forAll { (left: Int, right: Int) => multiplication(left, right) == (left * right) }
 
-  property("power") = forAll { (left: Int, right: Int) =>
-    power(left, right) == (0 until right).foldLeft(BigInt(1)) { (acc, _) => acc * left }
-  }
+  property("power") = forAll { (left: Int, right: Int) => power(left, right) == (0 until right).foldLeft(BigInt(1)) { (acc, _) => acc * left }
 
-  property("fermatNumber") = forAll { (n: Int) =>
-    fermatNumber(n) == Math.pow(2, Math.pow(2, 2)) + 1
-  }  
+  property("fermatNumber") = forAll { (n: Int) => fermatNumber(n) == Math.pow(2, Math.pow(2, n)) + 1 }
 
 end FermatNumbersSpecification
 
