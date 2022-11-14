@@ -16,20 +16,18 @@ end HomeworkSpecification
 object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
   import `Boolean Operators`._
 
-  property("not") = forAll { (b: Boolean) =>
-    not(b) == !b
-  }
+  property("not") = forAll { (b: Boolean) => not(b) == !b }
 
   property("and") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
-    
-    and(left, right) == left && right
+
+    and(left, right) == (left && right)
   }
 
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
-    
-    or(left, right) == left || right
+
+    or(left, right) == (left || right)
   }   
 
 end BooleanOperatorsSpecification
