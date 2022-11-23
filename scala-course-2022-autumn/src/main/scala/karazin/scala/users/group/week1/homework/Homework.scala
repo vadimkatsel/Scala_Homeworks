@@ -67,34 +67,35 @@ object Homework :
   end `Fermat Numbers`
 
   object `Look-and-say Sequence` :
-    val lookAndSaySequenceElement: Int => BigInt = n => {
 
-  /*Method that works with the string representation of numbers*/
-  def lookAndSaySequence(number: String): String = {
+  val lookAndSaySequenceElement: Int => BigInt = n => {
 
-  val result = new StringBuilder                                                        // execution result value
-  // The data type choice is due to methods of this data type that allow you to work with a string as with a list
+    /*Method that works with the string representation of numbers*/
+    def lookAndSaySequence(number: String): String = {
 
-  @tailrec
-  def lookAndSaySequenceLoop(numberString: String, digit: Char, times: Int): String =   // @tailrec method for string conversion
-    if (numberString.isEmpty) result.toString()                                         // if there is nothing left in the list-number, it's time to return the result
-    else if (numberString.head != digit)                                                // if there is a different element
-      result.append(times).append(digit)                                                // add to the result the number of repetitions of the digit and the digit itself
-      lookAndSaySequenceLoop(numberString.tail, numberString.head, 1)                   // call the method on the next different difit
-    else lookAndSaySequenceLoop(numberString.tail, numberString.head, times + 1)        // if there is no a different elements, call the method on the next same digit,
-  // increasing the counter of times
+      val result = new StringBuilder                                                        // execution result value
+      // The data type choice is due to methods of this data type that allow you to work with a string as with a list
 
-  lookAndSaySequenceLoop(number.tail + " ", number.head, 1)                              // call the loop from the lookAndSaySequence method body
+      @tailrec
+      def lookAndSaySequenceLoop(numberString: String, digit: Char, times: Int): String =   // @tailrec method for string conversion
+        if (numberString.isEmpty) result.toString()                                         // if there is nothing left in the list-number, it's time to return the result
+        else if (numberString.head != digit)                                                // if there is a different element
+          result.append(times).append(digit)                                                // add to the result the number of repetitions of the digit and the digit itself
+          lookAndSaySequenceLoop(numberString.tail, numberString.head, 1)                   // call the method on the next different difit
+        else lookAndSaySequenceLoop(numberString.tail, numberString.head, times + 1)        // if there is no a different elements, call the method on the next same digit,
+      // increasing the counter of times
 
-  }
+      lookAndSaySequenceLoop(number.tail + " ", number.head, 1)                              // call the loop from the lookAndSaySequence method body
 
-  @tailrec
-  def lookAndSaySequenceElementCounter(n: Int, num: String): BigInt = {                  // @tailrec method for recursive calculation of the value of the n-th term of the sequence
-  if (n <= 0) BigInt(num)
-  else lookAndSaySequenceElementCounter(n - 1, lookAndSaySequence(num))
-  }
+    }
 
-  lookAndSaySequenceElementCounter(n, "1")                                                // call for counting the nth member of the sequence, specifying the value of the 0th as "1"
+    @tailrec
+    def lookAndSaySequenceElementCounter(n: Int, num: String): BigInt = {                  // @tailrec method for recursive calculation of the value of the n-th term of the sequence
+      if (n <= 0) BigInt (num)
+      else lookAndSaySequenceElementCounter (n - 1, lookAndSaySequence (num) )
+    }
+
+    lookAndSaySequenceElementCounter(n, "1")                                                // call for counting the nth member of the sequence, specifying the value of the 0th as "1"
 
   }
 

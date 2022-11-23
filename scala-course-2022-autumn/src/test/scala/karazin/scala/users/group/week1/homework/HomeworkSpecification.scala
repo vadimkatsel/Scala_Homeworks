@@ -24,11 +24,21 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
     (and(left, right) == (left && right)) && (and(false,(7/0 == 2)) == false)
   }
 
+  property("and(error)") = propBoolean {
+    val error = new Exeption("And(error)'s exeption")
+    and(false, throw error) == false
+  }
+
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
 
     (or(left, right) == (left || right)) && (or(true,(7/0 == 2)) == true)
-  }   
+  }
+
+  property("or(error)") = propBoolean {
+  val error = new Exeption("Or(error)'s exeption")
+  or(true, throw error) == true
+  }
 
 end BooleanOperatorsSpecification
 
