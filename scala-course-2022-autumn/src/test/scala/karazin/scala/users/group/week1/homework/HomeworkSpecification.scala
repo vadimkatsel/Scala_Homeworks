@@ -20,8 +20,7 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
 
   property("and") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
-
-    (and(left, right) == (left && right)) && (and(false,(7/0 == 2)) == false)
+    and(left, right) == (left && right)
   }
 
   property("and(error)") = propBoolean {
@@ -31,8 +30,7 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
 
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
-
-    (or(left, right) == (left || right)) && (or(true,(7/0 == 2)) == true)
+    or(left, right) == (left || right)
   }
 
   property("or(error)") = propBoolean {
