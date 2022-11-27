@@ -40,27 +40,64 @@ object Homework :
 
   object `Boolean Operators` :
 
-    def not(b: Boolean): Boolean = ??? // here is my greatest solution
+  def not(b: Boolean): Boolean = if b then false else true
 
-    def and(left: Boolean, right: Boolean): Boolean = ???
+  def and(left: Boolean, right: => Boolean): Boolean = if not(left) then false else right
 
-    def or(left: Boolean, right: Boolean): Boolean = ???
+  def or(left: Boolean, right: => Boolean): Boolean = if left then true else right
 
   end `Boolean Operators`
 
   object `Fermat Numbers` :
 
-    val multiplication: (BigInt, BigInt) => BigInt = ???
+  val multiplication: (BigInt, BigInt) => BigInt = (multiplicand,multiplier) =>
+    @tailrec
+    def multiplicationTailRec(multiplicand: BigInt, multiplier: BigInt, product: BigInt): BigInt =
+      if multiplier == 0 then product
+      else multiplicationTailRec(multiplicand, multiplier - 1, product + multiplicand)
 
-    val power: (BigInt, BigInt) => BigInt = ???
+  multiplicationTailRec(multiplicand, multiplier, 0)
 
-    val fermatNumber: Int => BigInt = ???
+    val power: (BigInt, BigInt) => BigInt = (a, n) =>
+      if n == 0 then 1
+      else  multiplication(power(a, n - 1), a)
+
+    val fermatNumber: Int => BigInt = n => power(2, power(2, n)) + 1
 
   end `Fermat Numbers`
 
   object `Look-and-say Sequence` :
-    val lookAndSaySequenceElement: Int => BigInt = ???
+
+  val lookAndSaySequenceElement: Int => BigInt = n => {
+
+    /*Method that works with the string representation of numbers*/
+    def lookAndSaySequence(number: String): String = {
+
+      val result = new StringBuilder                                                        // execution result value
+      // The data type choice is due to methods of this data type that allow you to work with a string as with a list
+
+      @tailrec
+      def lookAndSaySequenceLoop(numberString: String, digit: Char, times: Int): String =   // @tailrec method for string conversion
+        if (numberString.isEmpty) result.toString()                                         // if there is nothing left in the list-number, it's time to return the result
+        else if (numberString.head != digit)                                                // if there is a different element
+          result.append(times).append(digit)                                                // add to the result the number of repetitions of the digit and the digit itself
+          lookAndSaySequenceLoop(numberString.tail, numberString.head, 1)                   // call the method on the next different difit
+        else lookAndSaySequenceLoop(numberString.tail, numberString.head, times + 1)        // if there is no a different elements, call the method on the next same digit,
+      // increasing the counter of times
+
+      lookAndSaySequenceLoop(number.tail + " ", number.head, 1)                              // call the loop from the lookAndSaySequence method body
+
+    }
+
+    @tailrec
+    def lookAndSaySequenceElementCounter(n: Int, num: String): BigInt = {                  // @tailrec method for recursive calculation of the value of the n-th term of the sequence
+      if (n <= 0) BigInt (num)
+      else lookAndSaySequenceElementCounter (n - 1, lookAndSaySequence (num) )
+    }
+
+    lookAndSaySequenceElementCounter(n, "1")                                                // call for counting the nth member of the sequence, specifying the value of the 0th as "1"
+
+  }
 
   end `Look-and-say Sequence`
-
 end Homework
