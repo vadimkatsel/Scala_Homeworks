@@ -63,8 +63,12 @@ object Homework:
 
     private lazy val g = gcd(abs(x), y)
 
+    override def hashCode: Int = 3 * this.numer + 2 * this.denom
+
     override def equals(other: Any): Boolean =
-      (this.numer == that.numer) && (that.denom == this.denom)
+      if other == this then true
+      if !(other instanceof Rational) then false
+      else (this.numer == that.numer) && (that.denom == this.denom)
 
   end Rational
 
